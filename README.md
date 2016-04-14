@@ -4,23 +4,25 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
 1. Creating the new ASP.Net Web project
 -------------------------------------------------------------------------------
 - prerequisites:
+  - Visual Studio 2015 (updated-to-date)
   - vNext (ASP.Net 5) must be installed
 
 - start VS2015 - new ASP.Net project
-  - select ASP.Net 5 Preview Templates/"Empty" Asp.net application. Do not check "Host in the cloud"
+  - select ASP.Net 5 Preview Templates/"Empty" Asp.net application (do not check "Host in the cloud")
 
-- open project.json. The dependency versions must match the installed versions
-  - start cmd, point to the project folder
-    - type in: dnvm list. 
+- open the project configuration file project.json. Ensure the enlisted dependecy versions match the installed dnx version.
+  - to manage dependency versions use the .Net version Manager (dnvm) utility.
+    - start cmd, point to the project folder
+    - type in: `dnvm list`. 
     - ensure the active version matches the dependency versions on the project.json file, 
-      - if not, upgrade: dnvm upgrade, or install the required version
+      - if not, upgrade/install: `dnvm upgrade`, or `dnvm install` the required version
       - set the desired version: dnvm use [installed version to use]
-    - in case when VS does not restore dependencies automatically, use the dnu utility. 
-      Restore the dependencies: dnu restore
+  - adding further dependencies to project.json will cause Visual Studio to download (restore) them. In case when VS does not restore dependencies automatically, use the dnu utility. 
+      Restore dependencies: `dnu restore`
       - note: "dnu restore" must be started from where the project.json besides. 
       - it looks for dependencies in the project.json file and donwloads them if necesarry.
       - in case when it tries to restore from a wrong seed (for example from a private repository) specify also the seed 
-        (eg: dnu restore -s https://www.nuget.org/api/v2/)
+        (eg: `dnu restore -s https://www.nuget.org/api/v2/`)
       
     sample project.json:
     ```json
@@ -58,9 +60,9 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
   - to serve static files add Microsoft.AspNet.StaticFiles to project dependencies
   - delete the default middleware implementation (serving a "hello World" phrase) from startup.Configure, 
     and configure the application builder to serve static files instead:
-    - add app.UseDefaultFiles();
-    - add app.UseStaticFiles();
-  - add a statif file (index.html) to the project's wwwroot folder (new item -> html page)
+    - add `app.UseDefaultFiles()`;
+    - add `app.UseStaticFiles()`;
+  - add a static file (index.html) to the project's wwwroot folder (new item -> html page)
   
   sample startup.cs:
     ```csharp
@@ -91,7 +93,8 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
     ```    
 - add a title and a body to the index.html and run the app skceleton. At this point the application is "runnable"    
   sample index.html:
-    ```
+
+    ```html
     <!DOCTYPE html>
     <html>
         <head>
@@ -101,8 +104,9 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
         <body>
             Hello World!
         </body>
-    </html>  
+    </html>
     ```
+
 2. Adding angular to the ASP.Net Web project
 -------------------------------------------------------------------------------
 - Visula Studio comes with a npm (Node Package Manager) version v 1.4.x. 
@@ -110,17 +114,18 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
   installs a new version of npm in the system.
 
 - install and set-up node.js (https://nodejs.org)
-  - after node.js is isntalled, it is recommended to install npm cli globally: npm -g install npm
-    - this will place also the newly installed npm on the top of the search path, so VS will use that version instead.
+  - after node.js is isntalled, it is recommended to install npm cli globally: `npm -g install npm`
+    - this will also place the newly installed npm on the top of the search path, so VS will use that version instead.
       note: VS and/or any cmd shell windows must be restarted to reload the updated search path.
 
   - in case when you are behind a corporate proxy set up npm: 
-    - npm config set proxy [corporate-proxy-address]
-    - npm config set https-proxy [corporate-proxy-address]
+    - `npm config set proxy [corporate-proxy-address]`
+    - `npm config set https-proxy [corporate-proxy-address]`
+    note: [corporate-proxy-address] represents the full address - including the port number - of the proxy
       
 - add an npm configuration file to the web project (add a package.json file) and set up the required dependencies
   a configured package.json containing all the commonly used dependencies looks like this:
-    ```
+    ```json
     {
         "version": "1.0.0",
         "name": "ASP.NET",
@@ -153,16 +158,19 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
 2.2 Configure Gulp to binplace node packages to wwwroot (Gulp is a task automation tool supported by VS. See: http://gulpjs.com/)
 - gulp and its dependencies can be installed in the project by enumerating them in the devDependencies configuration section of npm (package.json)
 - add gulp-related devDependenvies to package.json
-    ```
-    "devDependencies": {
-        "gulp": "^3.9.1",
-        "merge-stream": "^1.0.0",
-        "rimraf": "^2.5.2",
-        "gulp-typescript": "^2.13.0",
-        "gulp-sourcemaps": "^1.6.0",
-        "gulp-watch": "^4.3.5"
+    ```json
+    {
+      "devDependencies": {
+          "gulp": "^3.9.1",
+          "merge-stream": "^1.0.0",
+          "rimraf": "^2.5.2",
+          "gulp-typescript": "^2.13.0",
+          "gulp-sourcemaps": "^1.6.0",
+          "gulp-watch": "^4.3.5"
+      }
     }
     ```
+
 - add a gulp configuration file (gulpfile.js) to the project.
   - create a task to bin-place all the dependent modules to wwwroot/lib.
   - create a task to bin-place all the referred stylesheets to wwwroot/lib/css.

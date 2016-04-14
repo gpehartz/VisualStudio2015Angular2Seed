@@ -22,8 +22,8 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
       - in case when it tries to restore from a wrong seed (for example from a private repository) specify also the seed 
         (eg: dnu restore -s https://www.nuget.org/api/v2/)
       
-    sample projec.json:
-    
+    sample project.json:
+    ```json
     {
         "version": "1.0.0-*",
         "compilationOptions": {
@@ -54,7 +54,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
             "**.vspscc"
         ]
     }
-    
+    ```    
   - to serve static files add Microsoft.AspNet.StaticFiles to project dependencies
   - delete the default middleware implementation (serving a "hello World" phrase) from startup.Configure, 
     and configure the application builder to serve static files instead:
@@ -63,10 +63,11 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
   - add a statif file (index.html) to the project's wwwroot folder (new item -> html page)
   
   sample startup.cs:
+    ```csharp
     using Microsoft.AspNet.Builder;
     using Microsoft.AspNet.Hosting;
     using Microsoft.Extensions.DependencyInjection;
-
+    
     namespace Client
     {
         public class Startup
@@ -74,7 +75,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
             public void ConfigureServices(IServiceCollection services)
             {
             }
-
+    
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             public void Configure(IApplicationBuilder app)
             {
@@ -82,14 +83,15 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
                 app.UseDefaultFiles();
                 app.UseStaticFiles();
             }
-
+    
             // Entry point for the application.
             public static void Main(string[] args) => WebApplication.Run<Startup>(args);
         }
     }
-    
+    ```    
 - add a title and a body to the index.html and run the app skceleton. At this point the application is "runnable"    
   sample index.html:
+    ```
     <!DOCTYPE html>
     <html>
         <head>
@@ -100,7 +102,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
             Hello World!
         </body>
     </html>  
-
+    ```
 2. Adding angular to the ASP.Net Web project
 -------------------------------------------------------------------------------
 - Visula Studio comes with a npm (Node Package Manager) version v 1.4.x. 
@@ -118,7 +120,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
       
 - add an npm configuration file to the web project (add a package.json file) and set up the required dependencies
   a configured package.json containing all the commonly used dependencies looks like this:
-
+    ```
     {
         "version": "1.0.0",
         "name": "ASP.NET",
@@ -135,6 +137,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
         "devDependencies": {
         }
     }
+    ```
   further frequently used dependencies should be bootstrap/foundation, jquery etc.
   
   - saving the package.json, npm attempts to resotre all the configured dependencies. Monitor the output window for details
@@ -150,6 +153,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
 2.2 Configure Gulp to binplace node packages to wwwroot (Gulp is a task automation tool supported by VS. See: http://gulpjs.com/)
 - gulp and its dependencies can be installed in the project by enumerating them in the devDependencies configuration section of npm (package.json)
 - add gulp-related devDependenvies to package.json
+    ```
     "devDependencies": {
         "gulp": "^3.9.1",
         "merge-stream": "^1.0.0",
@@ -158,7 +162,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
         "gulp-sourcemaps": "^1.6.0",
         "gulp-watch": "^4.3.5"
     }
-
+    ```
 - add a gulp configuration file (gulpfile.js) to the project.
   - create a task to bin-place all the dependent modules to wwwroot/lib.
   - create a task to bin-place all the referred stylesheets to wwwroot/lib/css.

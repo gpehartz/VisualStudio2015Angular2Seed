@@ -159,7 +159,6 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
 - gulp and its dependencies can be installed in the project by enumerating them in the devDependencies configuration section of npm (package.json)
 - add gulp-related devDependenvies to package.json
     ```json
-    {
       "devDependencies": {
           "gulp": "^3.9.1",
           "merge-stream": "^1.0.0",
@@ -168,10 +167,9 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
           "gulp-sourcemaps": "^1.6.0",
           "gulp-watch": "^4.3.5"
       }
-    }
     ```
 
-- add a gulp configuration file (gulpfile.js) to the project.
+- add a gulp configuration file (gulpfile.js) to the project (see the attached sample).
   - create a task to bin-place all the dependent modules to wwwroot/lib.
   - create a task to bin-place all the referred stylesheets to wwwroot/lib/css.
   - create a task to bin-place all the application scripts to wwwroot/app.
@@ -179,11 +177,11 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
   - create a task to bin-place (watch) any modified application script to wwwroot/app.
   - bind the created tasks to the apropiate VS event ("before build", "clean", etc.).
 
-3. Add Angular2 code using typescript to the application.  
+3. Add Angular2 code using typescript to the application (see the attached sample).
 - create the main app component (app.component.ts)
 - create the application's bootstrap module (boot.ts)
 - wire-up the Angular2 related modules into index.html (drag and drop the modules from the wwwroot/lib folder to the index.html's head section.
-  note: the order of the modules is important (a module sould relay on others)!
+  note: the order of modules is important (a module sould relay on others)!
   - configure SystemJS (it is recommended to add defaultJSExtensions to true, so we don't need to specify .js each time referring a .js file)
   - import the application's bootstrap module (in our case boot.ts).
   - modify the body of the index.html to invoke tha main app component.

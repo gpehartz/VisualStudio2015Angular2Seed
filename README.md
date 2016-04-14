@@ -19,10 +19,11 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
       Restore the dependencies: dnu restore
       - note: "dnu restore" must be started from where the project.json besides. 
       - it looks for dependencies in the project.json file and donwloads them if necesarry.
-      - in case when it tries to restore from a wrong seed (our TeamCity repo) specify also the seed 
+      - in case when it tries to restore from a wrong seed (for example from a private repository) specify also the seed 
         (eg: dnu restore -s https://www.nuget.org/api/v2/)
       
     sample projec.json:
+    
     {
         "version": "1.0.0-*",
         "compilationOptions": {
@@ -70,8 +71,6 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
     {
         public class Startup
         {
-            // This method gets called by the runtime. Use this method to add services to the container.
-            // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
             public void ConfigureServices(IServiceCollection services)
             {
             }
@@ -114,11 +113,12 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
       note: VS and/or any cmd shell windows must be restarted to reload the updated search path.
 
   - in case when you are behind a corporate proxy set up npm: 
-    - npm config set proxy http://proxy.sdc.hp.com:8080
-    - npm config set https-proxy http://proxy.sdc.hp.com:8080    
+    - npm config set proxy [corporate-proxy-address]
+    - npm config set https-proxy [corporate-proxy-address]
       
 - add an npm configuration file to the web project (add a package.json file) and set up the required dependencies
   a configured package.json containing all the commonly used dependencies looks like this:
+
     {
         "version": "1.0.0",
         "name": "ASP.NET",
@@ -171,7 +171,7 @@ A seed Visual Studio 2015 project for easy to start Angular 2 development.
 - create the main app component (app.component.ts)
 - create the application's bootstrap module (boot.ts)
 - wire-up the Angular2 related modules into index.html (drag and drop the modules from the wwwroot/lib folder to the index.html's head section.
-  note: the order of the modules is important (a module sould relay on the other)!
+  note: the order of the modules is important (a module sould relay on others)!
   - configure SystemJS (it is recommended to add defaultJSExtensions to true, so we don't need to specify .js each time referring a .js file)
   - import the application's bootstrap module (in our case boot.ts).
   - modify the body of the index.html to invoke tha main app component.

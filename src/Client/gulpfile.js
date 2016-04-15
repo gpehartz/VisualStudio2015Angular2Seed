@@ -15,6 +15,8 @@ var tscConfig = require('./scripts/tsconfig.json');
 var paths = {
     npm: './node_modules/',
     scripts: './scripts/**/*.ts',
+    web_files: ['./scripts/**/*.html', './scripts/web.config'],
+    web_root: './wwwroot',
     lib: './wwwroot/lib/',
     css: './wwwroot/lib/css',
     app: './wwwroot/app'
@@ -52,11 +54,15 @@ gulp.task('clean:libs', function (callback) {
 //gulp.task('build:scripts', ['copy:libs'], function () {
 
 gulp.task('build:scripts', function () {
-    return gulp.src(paths.scripts)
+    var typeScriptStream = gulp.src(paths.scripts)
                .pipe(sourcemaps.init())
 		       .pipe(ts(tscConfig.compilerOptions))
                .pipe(sourcemaps.write('.'))
                .pipe(gulp.dest(paths.app));
+
+    var webFileStream = gulp.src(paths.web_files).pipe(gulp.dest(paths.web_root));
+
+    return mergeStream(webFileStream, typeScriptStream);
 });
 
 gulp.task('autobuild:scripts', function () {

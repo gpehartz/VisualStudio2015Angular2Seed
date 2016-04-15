@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Angular 2 ASP.Net seed</title>
+
+        <!-- Set the base href (see: routing)-->
+        <base href ="/">
+
+        <!-- IE required polyfills, in this exact order -->
+        <script src="lib/es6-shim.js"></script>
+        <script src="lib/system-polyfills.js"></script>
+        <script src="lib/angular2-polyfills.js"></script>
+        <script src="lib/system.js"></script>
+        <script src="lib/rx.js"></script>
+        <script src="lib/angular2.dev.js"></script>
+        <script src="lib/http.dev.js"></script>
+        <script src="lib/router.dev.js"></script>
+        <script>
+            System.config({
+                packages: {
+                    app: {
+                        format: 'register',
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+            System.import('app/boot').catch(console.log.bind(console));
+        </script>
+    </head>
+    <body>
+        <main-app>Loading...</main-app>
+    </body>
+</html>

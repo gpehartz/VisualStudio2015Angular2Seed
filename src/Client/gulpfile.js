@@ -10,16 +10,14 @@ var rimraf = require('rimraf');
 var ts = require('gulp-typescript');
 var sourcemaps = require('gulp-sourcemaps');
 var watch = require('gulp-watch');
-var tscConfig = require('./scripts/tsconfig.json');
+var tscConfig = require('./tsconfig.json');
 
 var paths = {
     npm: './node_modules/',
-    scripts: './scripts/**/*.ts',
-    web_files: ['./scripts/**/*.html', './scripts/web.config'],
-    web_root: './wwwroot',
-    lib: './wwwroot/lib/',
+    scripts: './wwwroot/**/*.ts',
+    lib: './wwwroot/lib',
     css: './wwwroot/lib/css',
-    app: './wwwroot/app'
+    appdev: './wwwroot/'
 };
 
 var dependencies = [
@@ -54,15 +52,11 @@ gulp.task('clean:libs', function (callback) {
 //gulp.task('build:scripts', ['copy:libs'], function () {
 
 gulp.task('build:scripts', function () {
-    var typeScriptStream = gulp.src(paths.scripts)
+    return gulp.src(paths.scripts)
                .pipe(sourcemaps.init())
 		       .pipe(ts(tscConfig.compilerOptions))
                .pipe(sourcemaps.write('.'))
-               .pipe(gulp.dest(paths.app));
-
-    var webFileStream = gulp.src(paths.web_files).pipe(gulp.dest(paths.web_root));
-
-    return mergeStream(webFileStream, typeScriptStream);
+               .pipe(gulp.dest(paths.appdev));
 });
 
 gulp.task('autobuild:scripts', function () {
